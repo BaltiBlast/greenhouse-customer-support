@@ -1,0 +1,33 @@
+{
+  "name": "greenhouse-customer-support",
+  "version": "1.0.0",
+  "description": "Customer support application monorepo",
+  "private": true,
+  "workspaces": [
+    "api",
+    "web",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "concurrently \"npm run dev --workspace=web\" \"npm run dev --workspace=api\"",
+    "dev:web": "npm run dev --workspace=web",
+    "dev:api": "npm run dev --workspace=api",
+    "build": "npm run build --workspaces --if-present",
+    "test": "npm run test --workspaces --if-present",
+    "lint": "npm run lint --workspaces --if-present"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BaltiBlast/greenhouse-customer-support.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  },
+  "bugs": {
+    "url": "https://github.com/BaltiBlast/greenhouse-customer-support/issues"
+  },
+  "homepage": "https://github.com/BaltiBlast/greenhouse-customer-support#readme"
+}
