@@ -21,7 +21,9 @@ spécifiques présents dans `src` restent applicables à leur périmètre.
 - `src/components` contient uniquement les composants réellement partagés.
 - `src/services` centralise les communications avec l'API.
 - `src/styles` contient le reset, les variables et les styles globaux.
+- `src/theme` contient la gestion des thèmes clair et sombre.
 - `src/assets` contient les ressources statiques importées par l'application.
+- `public/icons` contient les favicons et les icônes destinées au manifeste web.
 - Consulter le fichier `AGENTS.md` du dossier concerné avant toute modification.
 
 ## Routage
