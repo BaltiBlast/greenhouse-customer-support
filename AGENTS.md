@@ -34,6 +34,22 @@ présentes instructions et ont priorité en cas de règle plus spécifique.
 - Mettre à jour la documentation lorsqu’un changement modifie l’utilisation ou
   l’architecture du projet.
 
+## Cas non prévus — règle prioritaire
+
+Cette règle s'applique à l'ensemble du dépôt, quelle que soit la nature de la
+demande ou la partie du projet concernée.
+
+- Lorsqu'un élément, une logique, une technologie ou un besoin d'organisation
+  ne correspond pas clairement aux conventions existantes, le signaler avant
+  toute modification.
+- Présenter le cas rencontré et les options possibles, puis attendre une
+  décision explicite.
+- Ne jamais supposer une nouvelle convention ni créer une structure atypique
+  sans validation.
+- Après validation, ajouter ou mettre à jour le fichier `AGENTS.md` du périmètre
+  concerné afin de formaliser les règles retenues avant de généraliser
+  l'utilisation du nouvel élément.
+
 ## Conventions de nommage des commits
 
 Utiliser le format suivant :

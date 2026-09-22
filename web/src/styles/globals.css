@@ -1,0 +1,11 @@
+@import "./reset.css";
+
+:root {
+  font-family: system-ui, sans-serif;
+  color-scheme: light;
+}
+
+body {
+  min-width: 320px;
+  min-height: 100vh;
+}
