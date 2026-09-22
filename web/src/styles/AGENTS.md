@@ -20,3 +20,17 @@ Ce dossier contient uniquement :
   l'élément concerné.
 - Ne pas ajouter de nouvelle valeur globale lorsqu'une valeur existante répond
   déjà au besoin.
+
+## Variables globales
+
+- Utiliser les variables `--space-*` pour les marges, paddings et espacements.
+- Ne pas créer d'échelles distinctes pour les marges et les paddings.
+- Utiliser `--font-family-base` pour la police principale de l'application.
+- Utiliser les variables `--font-size-*` pour les tailles de texte.
+- Utiliser les variables `--color-*` selon leur rôle sémantique afin que les
+  styles restent compatibles avec les thèmes clair et sombre.
+- Ne pas écrire directement une couleur propre au thème dans un CSS Module.
+- Privilégier les variables existantes aux valeurs écrites directement dans les
+  CSS Modules.
+- Toute nouvelle catégorie de variable globale doit être discutée avant son
+  ajout.
