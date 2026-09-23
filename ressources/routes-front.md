@@ -12,10 +12,9 @@ pages principales.
 
 ## Navigation principale
 
-La navigation principale contient trois entrées :
+La navigation principale contient deux entrées :
 
 - Tableau de bord ;
-- Calendrier ;
 - Clients.
 
 ## Routes
@@ -27,16 +26,10 @@ Cette page est accessible uniquement lorsqu'aucune session valide n'est active.
 
 ### `/`
 
-Affiche le tableau de bord. Il présente les informations utiles pour commencer
-la journée : prochains créneaux, séances prévues et accès rapides aux actions
-principales.
-
-### `/calendar`
-
-Affiche les séances individuelles et les cours collectifs planifiés. La coach
-peut consulter ses créneaux selon une vue adaptée à la journée ou à la semaine,
-naviguer vers des dates passées ou futures et rouvrir un ancien élément pour le
-modifier ou ajouter une information oubliée.
+Affiche le planning principal. La coach consulte par défaut la journée actuelle,
+peut choisir une autre date ou une semaine complète, puis filtrer les coachings
+et les cours collectifs. La vue hebdomadaire utilise une grille sur ordinateur
+et une liste regroupée par journée sur mobile.
 
 ### `/clients`
 
@@ -64,24 +57,24 @@ Affiche le formulaire permettant de préparer ou d'enregistrer une nouvelle
 séance individuelle. La sélection du client concerné est obligatoire dans le
 formulaire.
 
-### `/sessions/:sessionId`
-
-Affiche une séance individuelle existante. La coach peut consulter les exercices
-réalisés, le ressenti facultatif du client et ses propres notes, puis modifier
-ces informations si nécessaire. Aucun statut de rendez-vous ou compte rendu
-obligatoire n'est imposé.
-
 ### `/group-classes/new`
 
 Affiche l'interface de création d'un cours collectif daté. La coach peut composer
 librement le cours avec une ou plusieurs parties, leurs formats, leurs paramètres
 et leurs mouvements.
 
-### `/group-classes/:classId`
+### `/events/:eventId`
 
-Affiche un cours collectif existant et permet de modifier sa date, sa structure,
-ses parties et ses mouvements. La création et la modification doivent partager
-les mêmes composants et conventions.
+Affiche les détails d'un événement existant. Le contenu présenté dépend de son
+type : coaching individuel ou cours collectif. Aucun statut de rendez-vous ou
+compte rendu obligatoire n'est imposé.
+
+### `/events/:eventId/edit`
+
+Affiche le formulaire de modification correspondant au type de l'événement. Un
+coaching individuel et un cours collectif conservent leurs champs et leurs
+règles propres, tandis que la route s'appuie sur l'identifiant commun de
+l'événement.
 
 ### `*`
 
