@@ -1,0 +1,133 @@
+.controls {
+  display: grid;
+  gap: var(--space-lg);
+  margin-bottom: var(--space-xl);
+}
+
+.primaryRow {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: var(--space-md);
+  align-items: center;
+}
+
+.viewSwitch,
+.filters {
+  display: flex;
+  gap: var(--space-xs);
+}
+
+.viewSwitch {
+  padding: var(--space-xs);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+}
+
+.viewSwitch button,
+.filters button,
+.todayButton,
+.dateNavigation button {
+  min-height: var(--size-lg);
+  padding: var(--space-sm) var(--space-md);
+  color: var(--color-text);
+  font: inherit;
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid transparent;
+}
+
+.viewSwitch .active,
+.filters .activeFilter {
+  color: var(--color-primary-text);
+  background-color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.dateNavigation {
+  display: grid;
+  grid-template-columns: var(--size-lg) minmax(12rem, auto) var(--size-lg);
+  gap: var(--space-sm);
+  align-items: center;
+  justify-content: center;
+}
+
+.dateNavigation p {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+}
+
+.dateNavigation button {
+  width: var(--size-lg);
+  padding: 0;
+  font-size: var(--font-size-xl);
+  border-color: var(--color-border);
+}
+
+.todayButton {
+  border-color: var(--color-border);
+}
+
+.filters {
+  flex-wrap: wrap;
+}
+
+.filters button {
+  min-height: auto;
+  padding: var(--space-sm) var(--space-md);
+  border-color: var(--color-border);
+}
+
+.viewSwitch button:focus-visible,
+.filters button:focus-visible,
+.todayButton:focus-visible,
+.dateNavigation button:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+@media (max-width: 56rem) {
+  .primaryRow {
+    grid-template-columns: 1fr auto;
+  }
+
+  .dateNavigation {
+    grid-column: 1 / -1;
+    grid-row: 2;
+  }
+}
+
+@media (max-width: 40rem) {
+  .controls {
+    gap: var(--space-md);
+    margin-bottom: var(--space-lg);
+  }
+
+  .primaryRow {
+    grid-template-columns: 1fr;
+  }
+
+  .viewSwitch button {
+    flex: 1;
+  }
+
+  .dateNavigation {
+    grid-column: auto;
+    grid-row: auto;
+    grid-template-columns: var(--size-lg) minmax(0, 1fr) var(--size-lg);
+  }
+
+  .dateNavigation p {
+    font-size: var(--font-size-md);
+  }
+
+  .filters {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .filters button {
+    padding-inline: var(--space-sm);
+    font-size: var(--font-size-sm);
+  }
+}

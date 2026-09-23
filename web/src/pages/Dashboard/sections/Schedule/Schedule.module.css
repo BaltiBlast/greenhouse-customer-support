@@ -1,0 +1,210 @@
+.dailySchedule {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.dayColumn {
+  min-width: 0;
+}
+
+.dayHeader {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: var(--space-md);
+  margin-bottom: var(--space-md);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.dayHeader h2 {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  text-transform: capitalize;
+}
+
+.dayHeader > span {
+  display: inline-grid;
+  width: var(--size-md);
+  height: var(--size-md);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+  border: 1px solid var(--color-border);
+  place-items: center;
+}
+
+.dayEvents {
+  display: grid;
+  gap: var(--space-md);
+}
+
+.eventCard {
+  padding: var(--space-lg);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-left: 0.25rem solid var(--color-primary);
+}
+
+.finished {
+  opacity: 0.55;
+}
+
+.eventHeader {
+  display: flex;
+  gap: var(--space-sm);
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: var(--space-md);
+}
+
+.eventType {
+  color: var(--color-primary);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.eventHeader time {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+}
+
+.eventCard h3 {
+  margin-bottom: var(--space-md);
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.eventDetails {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: var(--space-md);
+  margin-bottom: var(--space-lg);
+}
+
+.eventDetails dt {
+  margin-bottom: var(--space-xs);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-xs);
+}
+
+.eventDetails dd {
+  font-size: var(--font-size-sm);
+  line-height: 1.35;
+}
+
+.eventActions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-sm);
+}
+
+.eventActions button {
+  padding: var(--space-sm) var(--space-md);
+  color: var(--color-text);
+  font: inherit;
+  font-size: var(--font-size-sm);
+  cursor: pointer;
+  background: transparent;
+  border: 1px solid var(--color-border);
+}
+
+.eventActions button:hover,
+.eventActions button:focus-visible {
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+  outline: 0;
+}
+
+.emptyDay {
+  padding: var(--space-xl) var(--space-md);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  text-align: center;
+  border: 1px dashed var(--color-border);
+}
+
+.weekGrid {
+  display: grid;
+  grid-template-columns: repeat(7, minmax(10rem, 1fr));
+  gap: var(--space-md);
+  min-width: 76rem;
+}
+
+.weeklySchedule {
+  overflow-x: auto;
+  padding-bottom: var(--space-md);
+}
+
+.weekList {
+  display: none;
+}
+
+.dayColumn .dayHeader {
+  align-items: flex-start;
+}
+
+.dayColumn .dayHeader h2 {
+  font-size: var(--font-size-md);
+  line-height: 1.35;
+}
+
+.weekdayLine,
+.monthLine {
+  display: block;
+}
+
+.dayColumn .eventCard {
+  padding: var(--space-md);
+}
+
+.dayColumn .eventDetails {
+  grid-template-columns: 1fr;
+  gap: var(--space-sm);
+}
+
+.dayColumn .eventDetails div:first-child {
+  display: none;
+}
+
+.dayColumn .eventActions {
+  display: grid;
+}
+
+@media (max-width: 40rem) {
+  .eventCard {
+    padding: var(--space-md);
+  }
+
+  .eventDetails {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .eventDetails div:last-child {
+    grid-column: 1 / -1;
+  }
+
+  .eventActions {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .eventActions button {
+    padding-inline: var(--space-xs);
+  }
+
+  .weeklySchedule {
+    overflow: visible;
+    padding-bottom: 0;
+  }
+
+  .weekGrid {
+    display: none;
+  }
+
+  .weekList {
+    display: grid;
+    gap: var(--space-xl);
+  }
+}
