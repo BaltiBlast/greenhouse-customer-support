@@ -11,7 +11,8 @@ Ce dossier contient uniquement :
 
 - les règles de reset communes à toute l'application ;
 - les variables et valeurs visuelles globales ;
-- les styles réellement applicables à l'ensemble de l'application.
+- les styles réellement applicables à l'ensemble de l'application ;
+- les CSS Modules partagés correspondant à un motif d'interface réutilisable.
 
 - Placer les normalisations du navigateur dans `reset.css`.
 - Placer les variables CSS et les règles globales dans `globals.css`.
@@ -20,6 +21,15 @@ Ce dossier contient uniquement :
   l'élément concerné.
 - Ne pas ajouter de nouvelle valeur globale lorsqu'une valeur existante répond
   déjà au besoin.
+
+## Styles de formulaires
+
+- Utiliser `Form.module.css` pour les styles communs aux formulaires.
+- Importer ce module explicitement dans chaque page ou composant concerné.
+- Ne conserver dans le CSS Module local que les règles propres au formulaire
+  ou à la page concernée.
+- Ne pas cibler globalement toutes les balises `form`, `input`, `textarea` ou
+  `fieldset`.
 
 ## Variables globales
 

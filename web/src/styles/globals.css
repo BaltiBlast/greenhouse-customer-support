@@ -36,6 +36,7 @@
   --color-border: #dfe3df;
   --color-primary: #59633b;
   --color-primary-text: #ffffff;
+  --color-required: #b84a2f;
 
   color-scheme: light;
 }
@@ -48,6 +49,7 @@
   --color-border: #313a34;
   --color-primary: #98a36a;
   --color-primary-text: #0f1711;
+  --color-required: #f08a68;
 
   color-scheme: dark;
 }
