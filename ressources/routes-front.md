@@ -20,7 +20,7 @@ La navigation principale contient trois entrées :
 
 ## Routes
 
-### `/connexion`
+### `/login`
 
 Affiche le formulaire permettant à la coach de se connecter à l'application.
 Cette page est accessible uniquement lorsqu'aucune session valide n'est active.
@@ -31,7 +31,7 @@ Affiche le tableau de bord. Il présente les informations utiles pour commencer
 la journée : prochains créneaux, séances prévues et accès rapides aux actions
 principales.
 
-### `/calendrier`
+### `/calendar`
 
 Affiche les séances individuelles et les cours collectifs planifiés. La coach
 peut consulter ses créneaux selon une vue adaptée à la journée ou à la semaine,
@@ -43,7 +43,7 @@ modifier ou ajouter une information oubliée.
 Affiche la liste des clients sportifs. Cette page permet de rechercher un client,
 d'ouvrir sa fiche et d'accéder à la création d'un nouveau client.
 
-### `/clients/nouveau`
+### `/clients/new`
 
 Affiche le formulaire de création d'un client sportif.
 
@@ -53,30 +53,31 @@ Affiche la fiche complète d'un client : informations générales, objectifs,
 éléments utiles à l'adaptation de l'accompagnement, mesures et historique des
 séances individuelles.
 
-### `/clients/:clientId/modifier`
+### `/clients/:clientId/edit`
 
 Affiche le formulaire de modification du client. Cette route réutilise le même
 composant de page et la même structure de formulaire que la création.
 
-### `/clients/:clientId/seances/nouvelle`
+### `/sessions/new`
 
 Affiche le formulaire permettant de préparer ou d'enregistrer une nouvelle
-séance individuelle pour le client concerné.
+séance individuelle. La sélection du client concerné est obligatoire dans le
+formulaire.
 
-### `/seances/:sessionId`
+### `/sessions/:sessionId`
 
 Affiche une séance individuelle existante. La coach peut consulter les exercices
 réalisés, le ressenti facultatif du client et ses propres notes, puis modifier
 ces informations si nécessaire. Aucun statut de rendez-vous ou compte rendu
 obligatoire n'est imposé.
 
-### `/cours/nouveau`
+### `/group-classes/new`
 
 Affiche l'interface de création d'un cours collectif daté. La coach peut composer
 librement le cours avec une ou plusieurs parties, leurs formats, leurs paramètres
 et leurs mouvements.
 
-### `/cours/:courseId`
+### `/group-classes/:classId`
 
 Affiche un cours collectif existant et permet de modifier sa date, sa structure,
 ses parties et ses mouvements. La création et la modification doivent partager

@@ -29,6 +29,13 @@ spécifiques présents dans `src` restent applicables à leur périmètre.
 ## Routage
 
 - Utiliser React Router en mode déclaratif.
+- Écrire tous les segments de route en anglais, même lorsque les libellés
+  visibles dans l'interface sont en français.
+- Utiliser des segments en minuscules et en kebab-case lorsqu'ils contiennent
+  plusieurs mots, par exemple `/group-classes`.
+- Utiliser `new` pour une création et `edit` pour une modification.
+- Nommer les paramètres dynamiques en anglais et en camelCase, par exemple
+  `:clientId`, `:sessionId` ou `:classId`.
 - Placer `BrowserRouter` uniquement dans `src/main.jsx`.
 - Centraliser les déclarations `Routes` et `Route` dans `src/App.jsx` tant que
   leur complexité ne justifie pas une organisation dédiée.
