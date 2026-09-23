@@ -1,3 +1,27 @@
+.page {
+  width: min(100%, 64rem);
+  padding: var(--space-xl);
+  margin: 0 auto;
+}
+
+.header {
+  margin-bottom: var(--space-xl);
+}
+
+.eyebrow {
+  margin-bottom: var(--space-sm);
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.header h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: var(--font-weight-bold);
+}
+
 .form {
   display: grid;
   gap: var(--space-lg);
@@ -40,6 +64,7 @@
 }
 
 .section input,
+.section select,
 .section textarea {
   width: 100%;
   padding: 0.75rem var(--space-md);
@@ -51,6 +76,7 @@
 }
 
 .section input:focus-visible,
+.section select:focus-visible,
 .section textarea:focus-visible,
 .secondaryButton:focus-visible,
 .submitButton:focus-visible {
@@ -104,6 +130,18 @@
 }
 
 @media (max-width: 40rem) {
+  .page {
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .header {
+    margin-bottom: var(--space-lg);
+  }
+
+  .header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
   .section {
     padding: var(--space-lg) var(--space-md);
   }

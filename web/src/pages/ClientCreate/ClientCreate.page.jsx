@@ -32,9 +32,9 @@ export default function ClientCreatePage() {
   }
 
   return (
-    <main className={styles.page}>
-      <header className={styles.header}>
-        <p className={styles.eyebrow}>Clients</p>
+    <main className={formStyles.page}>
+      <header className={formStyles.header}>
+        <p className={formStyles.eyebrow}>Clients</p>
         <h1>Ajouter un client</h1>
       </header>
 
