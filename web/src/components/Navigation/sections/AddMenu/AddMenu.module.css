@@ -3,7 +3,7 @@
 }
 
 .trigger {
-  min-height: 2.75rem;
+  min-height: var(--size-lg);
   padding: var(--space-sm) var(--space-lg);
   color: var(--color-primary-text);
   font: inherit;
@@ -14,16 +14,14 @@
 }
 
 .compact {
-  width: 2.75rem;
-  min-width: 2.75rem;
-  height: 2.75rem;
-  min-height: 2.75rem;
+  width: var(--size-lg);
+  min-width: var(--size-lg);
+  height: var(--size-lg);
   padding: 0;
   font-size: var(--font-size-lg);
 }
 
-.trigger:focus-visible,
-.menu a:focus-visible {
+.trigger:focus-visible {
   outline: 2px solid var(--color-primary);
   outline-offset: 2px;
 }

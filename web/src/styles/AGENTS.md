@@ -25,6 +25,9 @@ Ce dossier contient uniquement :
 
 - Utiliser les variables `--space-*` pour les marges, paddings et espacements.
 - Ne pas créer d'échelles distinctes pour les marges et les paddings.
+- Utiliser les variables `--size-*` pour les dimensions physiques des contrôles,
+  icônes, avatars, logos et autres éléments graphiques.
+- Ne pas utiliser `--size-*` pour les espacements ou les tailles de texte.
 - Utiliser `--font-family-base` pour la police principale de l'application.
 - Utiliser les variables `--font-size-*` pour les tailles de texte.
 - Utiliser les variables `--color-*` selon leur rôle sémantique afin que les

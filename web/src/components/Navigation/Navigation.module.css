@@ -11,8 +11,6 @@
 .logo {
   display: inline-flex;
   align-items: center;
-  color: var(--color-text);
-  text-decoration: none;
 }
 
 .logoMark {
@@ -46,7 +44,7 @@
   display: flex;
   align-items: center;
   width: min(18rem, 28vw);
-  min-height: 2.75rem;
+  min-height: var(--size-lg);
   padding: 0 var(--space-md);
   color: var(--color-text-muted);
   font: inherit;
@@ -64,8 +62,8 @@
 
 .search svg {
   flex: 0 0 auto;
-  width: 1.25rem;
-  height: 1.25rem;
+  width: var(--size-sm);
+  height: var(--size-sm);
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -78,8 +76,8 @@
 
 .menuButton {
   display: none;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: var(--size-lg);
+  height: var(--size-lg);
   padding: var(--space-sm);
   color: var(--color-text);
   cursor: pointer;
@@ -91,7 +89,7 @@
 .menuIcon,
 .menuIconOpen {
   position: relative;
-  width: 1.25rem;
+  width: var(--size-sm);
   height: 2px;
   background-color: currentColor;
 }
@@ -134,19 +132,17 @@
 }
 
 .compactAction {
-  width: 2.75rem;
-  min-width: 2.75rem;
-  height: 2.75rem;
-  min-height: 2.75rem;
+  width: var(--size-lg);
+  min-width: var(--size-lg);
+  height: var(--size-lg);
   padding: 0;
   justify-content: center;
-  font-size: var(--font-size-lg);
 }
 
 .closeButton {
   display: inline-grid;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: var(--size-lg);
+  height: var(--size-lg);
   padding: var(--space-sm);
   color: var(--color-text);
   cursor: pointer;
@@ -156,8 +152,8 @@
 }
 
 .closeButton svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: var(--size-sm);
+  height: var(--size-sm);
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;
@@ -175,7 +171,7 @@
   }
 
   .logoMark {
-    height: 2rem;
+    height: var(--size-md);
   }
 
   .actions {
@@ -250,9 +246,6 @@
   }
 
   .mobileMenuContent {
-    display: flex;
-    flex-direction: column;
-    gap: var(--space-md);
     padding: var(--space-lg) var(--space-md);
   }
 

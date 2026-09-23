@@ -1,7 +1,7 @@
 .toggle {
   display: inline-grid;
-  width: 2.75rem;
-  height: 2.75rem;
+  width: var(--size-lg);
+  height: var(--size-lg);
   padding: var(--space-sm);
   color: var(--color-text);
   cursor: pointer;
@@ -11,8 +11,8 @@
 }
 
 .toggle svg {
-  width: 1.25rem;
-  height: 1.25rem;
+  width: var(--size-sm);
+  height: var(--size-sm);
   fill: none;
   stroke: currentColor;
   stroke-linecap: round;

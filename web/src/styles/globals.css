@@ -8,6 +8,12 @@
   --space-xl: 2rem;
   --space-2xl: 3rem;
 
+  --size-xs: 1rem;
+  --size-sm: 1.25rem;
+  --size-md: 2rem;
+  --size-lg: 2.75rem;
+  --size-xl: 3.5rem;
+
   --font-family-base: system-ui, sans-serif;
 
   --font-size-xs: 0.75rem;
