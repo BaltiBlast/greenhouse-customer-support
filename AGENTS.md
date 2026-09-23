@@ -34,7 +34,18 @@ présentes instructions et ont priorité en cas de règle plus spécifique.
 - Mettre à jour la documentation lorsqu’un changement modifie l’utilisation ou
   l’architecture du projet.
 
-## Cas non prévus — règle prioritaire
+## Conventions de rédaction
+
+- Utiliser une rédaction naturelle, simple et directe dans les contenus du
+  projet, les textes d'interface et la documentation.
+- Ne jamais utiliser le tiret cadratin Unicode `U+2014`, souvent associé aux
+  textes générés automatiquement.
+- Préférer une virgule, un deux-points, des parenthèses ou un tiret simple (`-`)
+  selon le contexte.
+- Éviter les caractères typographiques décoratifs lorsqu'un caractère courant
+  permet d'exprimer la même chose clairement.
+
+## Cas non prévus : règle prioritaire
 
 Cette règle s'applique à l'ensemble du dépôt, quelle que soit la nature de la
 demande ou la partie du projet concernée.
