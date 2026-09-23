@@ -5,8 +5,9 @@ export const dashboardEvents = [
     dayOffset: 0,
     startTime: "08:30",
     duration: 60,
-    client: "Camille Martin",
     location: "Studio principal",
+    description: "Séance de renforcement général adaptée aux objectifs de Camille.",
+    client: "Camille Martin",
   },
   {
     id: "class-hiit",
@@ -14,8 +15,9 @@ export const dashboardEvents = [
     dayOffset: 0,
     startTime: "12:15",
     duration: 45,
-    className: "HIIT Express",
     location: "Salle Horizon",
+    description: "Circuit court alternant des phases de travail intense et de récupération.",
+    className: "HIIT Express",
   },
   {
     id: "coaching-lea",
@@ -23,8 +25,9 @@ export const dashboardEvents = [
     dayOffset: 0,
     startTime: "17:30",
     duration: 60,
-    client: "Léa Bernard",
     location: "Studio principal",
+    description: "Travail de mobilité et de renforcement du bas du corps.",
+    client: "Léa Bernard",
   },
   {
     id: "class-mobility",
@@ -32,8 +35,9 @@ export const dashboardEvents = [
     dayOffset: -2,
     startTime: "18:00",
     duration: 60,
-    className: "Mobilité",
     location: "Salle Horizon",
+    description: "Cours axé sur la mobilité articulaire et les amplitudes de mouvement.",
+    className: "Mobilité",
   },
   {
     id: "coaching-thomas",
@@ -41,8 +45,9 @@ export const dashboardEvents = [
     dayOffset: -1,
     startTime: "10:00",
     duration: 75,
-    client: "Thomas Petit",
     location: "Studio principal",
+    description: "Séance complète consacrée à la technique et au renforcement.",
+    client: "Thomas Petit",
   },
   {
     id: "class-cross-training",
@@ -50,8 +55,9 @@ export const dashboardEvents = [
     dayOffset: 1,
     startTime: "18:30",
     duration: 60,
-    className: "Cross Training",
     location: "Gymnase Nord",
+    description: "Enchaînement cardio et renforcement sous forme de plusieurs ateliers.",
+    className: "Cross Training",
   },
   {
     id: "coaching-ines",
@@ -59,8 +65,9 @@ export const dashboardEvents = [
     dayOffset: 2,
     startTime: "09:00",
     duration: 60,
-    client: "Inès Robert",
     location: "Studio principal",
+    description: "Coaching orienté sur le gainage et la stabilité.",
+    client: "Inès Robert",
   },
   {
     id: "class-tabata",
@@ -68,8 +75,9 @@ export const dashboardEvents = [
     dayOffset: 3,
     startTime: "12:30",
     duration: 45,
-    className: "Tabata",
     location: "Salle Horizon",
+    description: "Séquences de travail courtes organisées au format Tabata.",
+    className: "Tabata",
   },
   {
     id: "coaching-julien",
@@ -77,8 +85,9 @@ export const dashboardEvents = [
     dayOffset: 4,
     startTime: "11:00",
     duration: 90,
-    client: "Julien Richard",
     location: "Parc Central",
+    description: "Séance en extérieur combinant course, mobilité et renforcement.",
+    client: "Julien Richard",
   },
 ];
 

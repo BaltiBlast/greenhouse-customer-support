@@ -4,8 +4,7 @@ import styles from "./AddMenu.module.css";
 
 const actions = [
   { label: "Client", to: "/clients/new" },
-  { label: "Séance", to: "/sessions/new" },
-  { label: "Cours collectif", to: "/group-classes/new" },
+  { label: "Événement", to: "/events/new" },
 ];
 
 export default function AddMenu({ compact = false }) {

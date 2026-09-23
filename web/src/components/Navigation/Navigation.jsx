@@ -60,7 +60,7 @@ export default function Navigation() {
   return (
     <>
       <header className={styles.navigation}>
-        <Link className={styles.logo} to="/" aria-label="Greenhouse — Accueil">
+        <Link className={styles.logo} to="/" aria-label="Greenhouse : accueil">
           <img
             className={`${styles.logoMark} ${styles.logoLight}`}
             src={logoLight}
