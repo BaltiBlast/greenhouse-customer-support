@@ -1,4 +1,4 @@
-# AGENTS.md — API
+# AGENTS.md : API
 
 ## Périmètre
 
@@ -69,6 +69,22 @@ routes → controllers → services → accès aux données
   possible.
 - La couche d'accès aux données ne dépend ni d'Express ni des controllers.
 - Éviter les dépendances circulaires entre modules.
+
+## Routing
+
+- Le fichier `*.routes.js` de chaque module doit être importé dans
+  `api/router.js`.
+- `api/router.js` regroupe tous les routers de tous les modules.
+- Les routes des modules ne doivent jamais être déclarées directement dans
+  `app.js`.
+- `app.js` utilise uniquement le router central pour monter les routes de l'API.
+
+Chaque fichier `*.routes.js` doit :
+
+- créer un router Express ;
+- déclarer les routes du module ;
+- appeler les controllers du module ;
+- exporter le router du module.
 
 ## API et sécurité
 

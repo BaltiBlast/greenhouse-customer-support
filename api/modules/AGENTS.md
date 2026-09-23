@@ -1,4 +1,4 @@
-# AGENTS.md — Modules métier
+# AGENTS.md : Modules métier
 
 ## Périmètre
 
@@ -48,8 +48,20 @@ respecter artificiellement le schéma ci-dessus.
 ### Validation
 
 - Valider les entrées à la frontière du module.
-- Réutiliser la bibliothèque de validation déjà choisie par le projet.
+- Utiliser Zod pour valider les données externes avant l'appel au service.
+- Placer les schémas Zod du module dans un fichier `*.validation.js`.
+- Exporter des schémas nommés et explicites selon l'opération validée, par
+  exemple `createClientValidationSchema`.
+- Utiliser des objets stricts afin de refuser les champs inconnus.
+- Les schémas Zod peuvent nettoyer et normaliser les données d'entrée lorsque
+  cette transformation ne constitue pas une règle métier.
+- Conserver les règles métier et les transformations vers le format de
+  persistance dans le service.
+- Transformer les erreurs Zod en réponses HTTP structurées sans exposer de
+  détail technique interne.
 - Ne pas dupliquer un schéma ou une règle déjà disponible.
+- Ne pas utiliser un schéma Zod comme remplacement d'un schema Mongoose : Zod
+  protège l'entrée du module et Mongoose protège les données persistées.
 
 ## Relations entre modules
 
