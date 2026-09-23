@@ -1,0 +1,160 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 30;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 10vh var(--space-md) var(--space-md);
+  background-color: rgb(0 0 0 / 55%);
+}
+
+.modal {
+  width: min(100%, 36rem);
+  max-height: 80vh;
+  overflow: hidden;
+  color: var(--color-text);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 1rem 3rem rgb(0 0 0 / 24%);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 4rem;
+  padding: var(--space-sm) var(--space-md) var(--space-sm) var(--space-lg);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.header h2 {
+  font-size: var(--font-size-lg);
+  font-weight: 700;
+}
+
+.closeButton {
+  display: inline-grid;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: var(--space-sm);
+  color: var(--color-text);
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+  place-items: center;
+}
+
+.closeButton svg,
+.searchField svg {
+  width: 1.25rem;
+  height: 1.25rem;
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-width: 1.8;
+}
+
+.searchField {
+  display: flex;
+  align-items: center;
+  min-height: 3rem;
+  margin: var(--space-lg);
+  padding: 0 var(--space-md);
+  color: var(--color-text-muted);
+  background-color: var(--color-background);
+  border: 1px solid var(--color-border);
+}
+
+.searchField:focus-within {
+  border-color: var(--color-primary);
+  outline: 2px solid var(--color-primary);
+  outline-offset: 1px;
+}
+
+.searchField svg {
+  flex: 0 0 auto;
+}
+
+.searchField input {
+  width: 100%;
+  padding-left: var(--space-sm);
+  color: var(--color-text);
+  font: inherit;
+  background: transparent;
+  border: 0;
+  outline: 0;
+}
+
+.searchField input::placeholder {
+  color: var(--color-text-muted);
+}
+
+.results {
+  max-height: calc(80vh - 8.5rem);
+  padding: 0 var(--space-lg) var(--space-lg);
+  overflow-y: auto;
+}
+
+.results li + li {
+  border-top: 1px solid var(--color-border);
+}
+
+.results button {
+  width: 100%;
+  padding: var(--space-md) var(--space-sm);
+  color: var(--color-text);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  background: transparent;
+  border: 0;
+}
+
+.results button:hover,
+.results button:focus-visible {
+  color: var(--color-primary);
+  background-color: var(--color-background);
+  outline: 0;
+}
+
+.emptyResult {
+  padding: var(--space-lg) 0;
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 40rem) {
+  .backdrop {
+    padding: var(--space-md);
+  }
+
+  .modal {
+    max-height: calc(100dvh - (2 * var(--space-md)));
+  }
+
+  .header {
+    padding-left: var(--space-md);
+  }
+
+  .searchField {
+    margin: var(--space-md);
+  }
+
+  .results {
+    max-height: calc(100dvh - 9rem);
+    padding: 0 var(--space-md) var(--space-md);
+  }
+}

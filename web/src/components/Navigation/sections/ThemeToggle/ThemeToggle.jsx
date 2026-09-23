@@ -1,4 +1,4 @@
-import useTheme from "../../theme/useTheme.js";
+import useTheme from "../../../../theme/useTheme.js";
 import styles from "./ThemeToggle.module.css";
 
 function MoonIcon() {

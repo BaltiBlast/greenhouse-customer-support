@@ -41,6 +41,14 @@ components/
 
 ## Logique
 
+- Le composant principal exporté doit être la dernière déclaration de niveau
+  module dans son fichier.
+- Placer les petites fonctions et les petits composants strictement internes
+  au-dessus du composant principal.
+- Déplacer un élément interne dans un fichier dédié lorsqu'il possède sa propre
+  logique, ses propres ressources ou qu'il nuit à la lisibilité du composant
+  principal.
+- Ne rien déclarer sous le composant principal exporté.
 - Le composant principal orchestre la logique partagée par ses éléments
   internes.
 - Une logique strictement locale reste dans l'élément interne qui la possède.

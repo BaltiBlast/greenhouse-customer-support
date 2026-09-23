@@ -1,10 +1,41 @@
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router";
+import { Link } from "react-router";
 import logoDark from "../../assets/branding/logo-dark.png";
 import logoLight from "../../assets/branding/logo-light.png";
-import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
-import { clients } from "./Navigation.data.js";
 import styles from "./Navigation.module.css";
+import ClientSearchModal from "./sections/ClientSearchModal/ClientSearchModal.jsx";
+import ThemeToggle from "./sections/ThemeToggle/ThemeToggle.jsx";
+
+function SearchTrigger({ compact = false, onClick }) {
+  return (
+    <button
+      className={`${styles.search} ${compact ? styles.compactAction : ""}`}
+      type="button"
+      aria-label="Rechercher un client"
+      onClick={onClick}
+    >
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="11" cy="11" r="7" />
+        <path d="m16 16 5 5" />
+      </svg>
+      {!compact && <span>Rechercher un client</span>}
+    </button>
+  );
+}
+
+function NewButton({ compact = false }) {
+  return (
+    <button
+      className={`${styles.newButton} ${compact ? styles.compactAction : ""}`}
+      type="button"
+      aria-label="Créer un nouvel élément"
+      disabled
+      title="Les actions de création seront ajoutées prochainement"
+    >
+      {compact ? "+" : "+ Nouveau"}
+    </button>
+  );
+}
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -61,16 +92,22 @@ export default function Navigation() {
           <ThemeToggle />
         </div>
 
-        <button
-          className={styles.menuButton}
-          type="button"
-          aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
-          aria-expanded={isMenuOpen}
-          aria-controls="mobile-navigation"
-          onClick={() => setIsMenuOpen((current) => !current)}
-        >
-          <span className={isMenuOpen ? styles.menuIconOpen : styles.menuIcon} />
-        </button>
+        <div className={styles.mobileActions}>
+          <SearchTrigger compact onClick={openSearch} />
+          <NewButton compact />
+          <button
+            className={styles.menuButton}
+            type="button"
+            aria-label={isMenuOpen ? "Fermer le menu" : "Ouvrir le menu"}
+            aria-expanded={isMenuOpen}
+            aria-controls="mobile-navigation"
+            onClick={() => setIsMenuOpen((current) => !current)}
+          >
+            <span
+              className={isMenuOpen ? styles.menuIconOpen : styles.menuIcon}
+            />
+          </button>
+        </div>
       </header>
 
       <button
@@ -102,8 +139,6 @@ export default function Navigation() {
         </div>
 
         <div className={styles.mobileMenuContent}>
-          <SearchTrigger onClick={openSearch} />
-          <NewButton />
           <div className={styles.themeRow}>
             <span>Thème</span>
             <ThemeToggle />
@@ -115,113 +150,5 @@ export default function Navigation() {
         <ClientSearchModal onClose={() => setIsSearchOpen(false)} />
       )}
     </>
-  );
-}
-
-function SearchTrigger({ onClick }) {
-  return (
-    <button className={styles.search} type="button" onClick={onClick}>
-      <svg viewBox="0 0 24 24" aria-hidden="true">
-        <circle cx="11" cy="11" r="7" />
-        <path d="m16 16 5 5" />
-      </svg>
-      <span>Rechercher un client</span>
-    </button>
-  );
-}
-
-function ClientSearchModal({ onClose }) {
-  const [searchTerm, setSearchTerm] = useState("");
-  const navigate = useNavigate();
-  const normalizedSearch = normalizeText(searchTerm.trim());
-  const filteredClients = normalizedSearch
-    ? clients.filter(({ firstName, lastName }) =>
-        normalizeText(`${firstName} ${lastName}`).includes(normalizedSearch),
-      )
-    : [];
-
-  function openClient(clientId) {
-    onClose();
-    navigate(`/clients/${clientId}`);
-  }
-
-  return (
-    <div className={styles.searchModalBackdrop} onMouseDown={onClose}>
-      <section
-        className={styles.searchModal}
-        role="dialog"
-        aria-modal="true"
-        aria-labelledby="client-search-title"
-        onMouseDown={(event) => event.stopPropagation()}
-      >
-        <div className={styles.searchModalHeader}>
-          <h2 id="client-search-title">Rechercher un client</h2>
-          <button
-            className={styles.closeButton}
-            type="button"
-            aria-label="Fermer la recherche"
-            onClick={onClose}
-          >
-            <svg viewBox="0 0 24 24" aria-hidden="true">
-              <path d="M5 5l14 14M19 5 5 19" />
-            </svg>
-          </button>
-        </div>
-
-        <label className={styles.modalSearchField}>
-          <span className={styles.visuallyHidden}>Nom ou prénom du client</span>
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <circle cx="11" cy="11" r="7" />
-            <path d="m16 16 5 5" />
-          </svg>
-          <input
-            type="search"
-            value={searchTerm}
-            placeholder="Nom ou prénom"
-            autoFocus
-            onChange={(event) => setSearchTerm(event.target.value)}
-          />
-        </label>
-
-        <div className={styles.searchResults}>
-          {!normalizedSearch ? null : filteredClients.length > 0 ? (
-            <ul>
-              {filteredClients.map((client) => (
-                <li key={client.id}>
-                  <button
-                    type="button"
-                    onClick={() => openClient(client.id)}
-                  >
-                    {client.firstName} {client.lastName}
-                  </button>
-                </li>
-              ))}
-            </ul>
-          ) : (
-            <p className={styles.emptyResult}>Aucun client trouvé.</p>
-          )}
-        </div>
-      </section>
-    </div>
-  );
-}
-
-function normalizeText(value) {
-  return value
-    .normalize("NFD")
-    .replace(/[\u0300-\u036f]/g, "")
-    .toLowerCase();
-}
-
-function NewButton() {
-  return (
-    <button
-      className={styles.newButton}
-      type="button"
-      disabled
-      title="Les actions de création seront ajoutées prochainement"
-    >
-      + Nouveau
-    </button>
   );
 }

@@ -10,4 +10,3 @@ export const clients = [
   { id: "nicolas-simon", firstName: "Nicolas", lastName: "Simon" },
   { id: "chloe-michel", firstName: "Chloé", lastName: "Michel" },
 ];
-
