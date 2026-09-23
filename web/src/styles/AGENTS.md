@@ -29,6 +29,7 @@ Ce dossier contient uniquement :
   icônes, avatars, logos et autres éléments graphiques.
 - Ne pas utiliser `--size-*` pour les espacements ou les tailles de texte.
 - Utiliser `--font-family-base` pour la police principale de l'application.
+- Utiliser les variables `--font-weight-*` pour les graisses de texte.
 - Utiliser les variables `--font-size-*` pour les tailles de texte.
 - Utiliser les variables `--color-*` selon leur rôle sémantique afin que les
   styles restent compatibles avec les thèmes clair et sombre.

@@ -16,6 +16,7 @@ pages/
     ├── NomPage.page.jsx
     ├── NomPage.module.css
     ├── NomPage.data.js        # si des données statiques sont nécessaires
+    ├── NomPage.utils.js       # si des fonctions pures sont nécessaires
     └── sections/              # si la page doit être découpée en sections
         └── NomSection/
             ├── NomSection.jsx
@@ -68,3 +69,17 @@ pages/
   donnée reçue depuis l'API.
 - Déplacer une donnée vers un emplacement partagé uniquement lorsqu'elle est
   utilisée par plusieurs pages.
+
+## Fonctions utilitaires
+
+- Placer les fonctions pures propres à une page ou à une section dans un fichier
+  `*.utils.js` colocalisé avec l'élément concerné.
+- Regrouper les fonctions exposées dans un unique objet exporté par défaut.
+- Déclarer directement chaque constante et chaque fonction comme une propriété
+  de cet objet, sans déclaration intermédiaire en dehors de celui-ci.
+- Importer cet objet sous le nom `utils` sans le déstructurer afin d'identifier
+  clairement la provenance des fonctions utilisées dans le fichier appelant.
+- Ne pas placer d'état React, de hook, d'accès au DOM ou d'effet externe dans un
+  fichier utilitaire.
+- Conserver une fonction dans le fichier JSX lorsqu'elle est courte et
+  strictement liée à son rendu.
