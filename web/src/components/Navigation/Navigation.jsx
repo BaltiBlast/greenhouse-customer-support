@@ -1,21 +1,27 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import logoDark from "../../assets/branding/logo-dark.png";
 import logoLight from "../../assets/branding/logo-light.png";
 import ThemeToggle from "../ThemeToggle/ThemeToggle.jsx";
+import { clients } from "./Navigation.data.js";
 import styles from "./Navigation.module.css";
 
 export default function Navigation() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   useEffect(() => {
-    if (!isMenuOpen) {
+    if (!isMenuOpen && !isSearchOpen) {
       return undefined;
     }
 
     function closeOnEscape(event) {
       if (event.key === "Escape") {
-        setIsMenuOpen(false);
+        if (isSearchOpen) {
+          setIsSearchOpen(false);
+        } else {
+          setIsMenuOpen(false);
+        }
       }
     }
 
@@ -26,7 +32,12 @@ export default function Navigation() {
       document.removeEventListener("keydown", closeOnEscape);
       document.body.style.overflow = "";
     };
-  }, [isMenuOpen]);
+  }, [isMenuOpen, isSearchOpen]);
+
+  function openSearch() {
+    setIsMenuOpen(false);
+    setIsSearchOpen(true);
+  }
 
   return (
     <>
@@ -45,7 +56,7 @@ export default function Navigation() {
         </Link>
 
         <div className={styles.actions}>
-          <SearchField />
+          <SearchTrigger onClick={openSearch} />
           <NewButton />
           <ThemeToggle />
         </div>
@@ -91,7 +102,7 @@ export default function Navigation() {
         </div>
 
         <div className={styles.mobileMenuContent}>
-          <SearchField />
+          <SearchTrigger onClick={openSearch} />
           <NewButton />
           <div className={styles.themeRow}>
             <span>Thème</span>
@@ -99,25 +110,107 @@ export default function Navigation() {
           </div>
         </div>
       </aside>
+
+      {isSearchOpen && (
+        <ClientSearchModal onClose={() => setIsSearchOpen(false)} />
+      )}
     </>
   );
 }
 
-function SearchField() {
+function SearchTrigger({ onClick }) {
   return (
-    <label className={styles.search}>
-      <span className={styles.visuallyHidden}>Rechercher un client</span>
+    <button className={styles.search} type="button" onClick={onClick}>
       <svg viewBox="0 0 24 24" aria-hidden="true">
         <circle cx="11" cy="11" r="7" />
         <path d="m16 16 5 5" />
       </svg>
-      <input
-        type="search"
-        placeholder="Rechercher un client"
-        aria-label="Rechercher un client"
-      />
-    </label>
+      <span>Rechercher un client</span>
+    </button>
   );
+}
+
+function ClientSearchModal({ onClose }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
+  const normalizedSearch = normalizeText(searchTerm.trim());
+  const filteredClients = normalizedSearch
+    ? clients.filter(({ firstName, lastName }) =>
+        normalizeText(`${firstName} ${lastName}`).includes(normalizedSearch),
+      )
+    : [];
+
+  function openClient(clientId) {
+    onClose();
+    navigate(`/clients/${clientId}`);
+  }
+
+  return (
+    <div className={styles.searchModalBackdrop} onMouseDown={onClose}>
+      <section
+        className={styles.searchModal}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="client-search-title"
+        onMouseDown={(event) => event.stopPropagation()}
+      >
+        <div className={styles.searchModalHeader}>
+          <h2 id="client-search-title">Rechercher un client</h2>
+          <button
+            className={styles.closeButton}
+            type="button"
+            aria-label="Fermer la recherche"
+            onClick={onClose}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M5 5l14 14M19 5 5 19" />
+            </svg>
+          </button>
+        </div>
+
+        <label className={styles.modalSearchField}>
+          <span className={styles.visuallyHidden}>Nom ou prénom du client</span>
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <circle cx="11" cy="11" r="7" />
+            <path d="m16 16 5 5" />
+          </svg>
+          <input
+            type="search"
+            value={searchTerm}
+            placeholder="Nom ou prénom"
+            autoFocus
+            onChange={(event) => setSearchTerm(event.target.value)}
+          />
+        </label>
+
+        <div className={styles.searchResults}>
+          {!normalizedSearch ? null : filteredClients.length > 0 ? (
+            <ul>
+              {filteredClients.map((client) => (
+                <li key={client.id}>
+                  <button
+                    type="button"
+                    onClick={() => openClient(client.id)}
+                  >
+                    {client.firstName} {client.lastName}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p className={styles.emptyResult}>Aucun client trouvé.</p>
+          )}
+        </div>
+      </section>
+    </div>
+  );
+}
+
+function normalizeText(value) {
+  return value
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .toLowerCase();
 }
 
 function NewButton() {
