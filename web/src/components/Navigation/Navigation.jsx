@@ -3,6 +3,7 @@ import { Link } from "react-router";
 import logoDark from "../../assets/branding/logo-dark.png";
 import logoLight from "../../assets/branding/logo-light.png";
 import styles from "./Navigation.module.css";
+import AddMenu from "./sections/AddMenu/AddMenu.jsx";
 import ClientSearchModal from "./sections/ClientSearchModal/ClientSearchModal.jsx";
 import ThemeToggle from "./sections/ThemeToggle/ThemeToggle.jsx";
 
@@ -19,20 +20,6 @@ function SearchTrigger({ compact = false, onClick }) {
         <path d="m16 16 5 5" />
       </svg>
       {!compact && <span>Rechercher un client</span>}
-    </button>
-  );
-}
-
-function NewButton({ compact = false }) {
-  return (
-    <button
-      className={`${styles.newButton} ${compact ? styles.compactAction : ""}`}
-      type="button"
-      aria-label="Créer un nouvel élément"
-      disabled
-      title="Les actions de création seront ajoutées prochainement"
-    >
-      {compact ? "+" : "+ Nouveau"}
     </button>
   );
 }
@@ -88,13 +75,13 @@ export default function Navigation() {
 
         <div className={styles.actions}>
           <SearchTrigger onClick={openSearch} />
-          <NewButton />
+          <AddMenu />
           <ThemeToggle />
         </div>
 
         <div className={styles.mobileActions}>
           <SearchTrigger compact onClick={openSearch} />
-          <NewButton compact />
+          <AddMenu compact />
           <button
             className={styles.menuButton}
             type="button"

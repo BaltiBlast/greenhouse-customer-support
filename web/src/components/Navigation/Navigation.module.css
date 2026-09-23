@@ -133,20 +133,6 @@
   display: none;
 }
 
-.newButton {
-  min-height: 2.75rem;
-  padding: var(--space-sm) var(--space-lg);
-  color: var(--color-primary-text);
-  font-weight: 600;
-  background-color: var(--color-primary);
-  border: 1px solid var(--color-primary);
-}
-
-.newButton:disabled {
-  cursor: default;
-  opacity: 1;
-}
-
 .compactAction {
   width: 2.75rem;
   min-width: 2.75rem;

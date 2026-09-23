@@ -1,0 +1,54 @@
+.container {
+  position: relative;
+}
+
+.trigger {
+  min-height: 2.75rem;
+  padding: var(--space-sm) var(--space-lg);
+  color: var(--color-primary-text);
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  background-color: var(--color-primary);
+  border: 1px solid var(--color-primary);
+}
+
+.compact {
+  width: 2.75rem;
+  min-width: 2.75rem;
+  height: 2.75rem;
+  min-height: 2.75rem;
+  padding: 0;
+  font-size: var(--font-size-lg);
+}
+
+.trigger:focus-visible,
+.menu a:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+.menu {
+  position: absolute;
+  top: calc(100% + var(--space-sm));
+  right: 0;
+  z-index: 25;
+  width: 12rem;
+  padding: var(--space-xs);
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+  box-shadow: 0 0.75rem 2rem rgb(0 0 0 / 18%);
+}
+
+.menu a {
+  display: block;
+  padding: var(--space-md);
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.menu a:hover,
+.menu a:focus-visible {
+  color: var(--color-primary);
+  background-color: var(--color-background);
+}
