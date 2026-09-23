@@ -1,4 +1,4 @@
-# AGENTS.md — Navigation
+# AGENTS.md : Navigation
 
 ## Recherche client
 
@@ -25,11 +25,10 @@
 
 ## Ajout rapide
 
-- Le bouton d'ajout ouvre un dropdown simple contenant `Client`, `Séance` et
-  `Cours collectif`.
+- Le bouton d'ajout ouvre un dropdown simple contenant `Client` et `Événement`.
 - Chaque action redirige directement vers son formulaire de création.
-- La création d'une séance utilise `/sessions/new` et le client est choisi
-  dans le formulaire.
+- La création d'un événement utilise `/events/new` et son type est choisi dans
+  le formulaire.
 - Le dropdown se ferme après la sélection d'une action ou un clic extérieur.
 - Ne pas ajouter de fermeture avec la touche `Échap`.
 

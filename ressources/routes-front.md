@@ -51,17 +51,11 @@ séances individuelles.
 Affiche le formulaire de modification du client. Cette route réutilise le même
 composant de page et la même structure de formulaire que la création.
 
-### `/sessions/new`
+### `/events/new`
 
-Affiche le formulaire permettant de préparer ou d'enregistrer une nouvelle
-séance individuelle. La sélection du client concerné est obligatoire dans le
-formulaire.
-
-### `/group-classes/new`
-
-Affiche l'interface de création d'un cours collectif daté. La coach peut composer
-librement le cours avec une ou plusieurs parties, leurs formats, leurs paramètres
-et leurs mouvements.
+Affiche le formulaire de création d'un événement. La coach choisit son type dans
+le formulaire, puis renseigne les informations propres à un coaching individuel
+ou à un cours collectif.
 
 ### `/events/:eventId`
 
