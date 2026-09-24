@@ -22,6 +22,17 @@
   font-weight: var(--font-weight-bold);
 }
 
+.state,
+.error {
+  padding: var(--space-xl);
+  color: var(--color-text-muted);
+  text-align: center;
+}
+
+.error {
+  color: var(--color-required);
+}
+
 @media (max-width: 40rem) {
   .dashboard {
     padding: var(--space-lg) var(--space-md);

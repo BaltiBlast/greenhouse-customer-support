@@ -1,6 +1,7 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { getClients } from "../../services/clients/clients.api.js";
+import { getEvents } from "../../services/events/events.api.js";
 import styles from "./Dashboard.module.css";
-import { dashboardEvents } from "./Dashboard.data.js";
 import DashboardControls from "./sections/DashboardControls/DashboardControls.jsx";
 import Schedule from "./sections/Schedule/Schedule.jsx";
 
@@ -26,26 +27,33 @@ function isSameDay(firstDate, secondDate) {
   return startOfDay(firstDate).getTime() === startOfDay(secondDate).getTime();
 }
 
-function createEventDate(referenceDate, dayOffset, startTime) {
-  const date = addDays(startOfDay(referenceDate), dayOffset);
+function createEventDate(date, startTime) {
+  const eventDate = new Date(`${date.slice(0, 10)}T00:00:00`);
   const [hours, minutes] = startTime.split(":").map(Number);
-  date.setHours(hours, minutes, 0, 0);
-  return date;
+  eventDate.setHours(hours, minutes, 0, 0);
+  return eventDate;
 }
 
-function createEvents(referenceDate) {
-  return dashboardEvents.map((event) => ({
+function prepareEvents(eventList, clientList) {
+  const clientsById = new Map(
+    clientList.map((client) => [client.id, `${client.firstName} ${client.lastName}`]),
+  );
+
+  return eventList.map((event) => ({
     ...event,
-    date: createEventDate(referenceDate, event.dayOffset, event.startTime),
+    date: createEventDate(event.date, event.startTime),
+    client: event.clientId ? clientsById.get(event.clientId) || "Client introuvable" : undefined,
   }));
 }
 
 export default function DashboardPage() {
+  const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [view, setView] = useState("day");
   const [selectedDate, setSelectedDate] = useState(() => startOfDay(new Date()));
   const [activeFilter, setActiveFilter] = useState("all");
   const today = useMemo(() => startOfDay(new Date()), []);
-  const events = useMemo(() => createEvents(today), [today]);
   const weekStart = startOfWeek(selectedDate);
   const weekDays = Array.from({ length: 7 }, (_, index) =>
     addDays(weekStart, index),
@@ -53,6 +61,32 @@ export default function DashboardPage() {
   const filteredEvents = events.filter(
     (event) => activeFilter === "all" || event.type === activeFilter,
   );
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadDashboardData() {
+      try {
+        const [eventList, clientList] = await Promise.all([
+          getEvents(controller.signal),
+          getClients(controller.signal),
+        ]);
+        setEvents(prepareEvents(eventList, clientList));
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setErrorMessage(error.message || "Impossible de récupérer les événements.");
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    loadDashboardData();
+
+    return () => controller.abort();
+  }, []);
 
   function changePeriod(direction) {
     setSelectedDate((currentDate) =>
@@ -83,14 +117,18 @@ export default function DashboardPage() {
         onToday={showToday}
       />
 
-      <Schedule
-        view={view}
-        selectedDate={selectedDate}
-        today={today}
-        weekDays={weekDays}
-        events={filteredEvents}
-        isSameDay={isSameDay}
-      />
+      {isLoading && <p className={styles.state} role="status">Chargement des événements...</p>}
+      {!isLoading && errorMessage && <p className={styles.error} role="alert">{errorMessage}</p>}
+      {!isLoading && !errorMessage && (
+        <Schedule
+          view={view}
+          selectedDate={selectedDate}
+          today={today}
+          weekDays={weekDays}
+          events={filteredEvents}
+          isSameDay={isSameDay}
+        />
+      )}
     </main>
   );
 }

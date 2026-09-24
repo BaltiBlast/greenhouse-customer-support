@@ -82,6 +82,9 @@ export default function Navigation() {
             <NavLink className={getNavigationLinkClass} to="/clients">
               Clients
             </NavLink>
+            <NavLink className={getNavigationLinkClass} to="/events">
+              Événements
+            </NavLink>
           </nav>
         </div>
 
@@ -145,6 +148,13 @@ export default function Navigation() {
               onClick={() => setIsMenuOpen(false)}
             >
               Clients
+            </NavLink>
+            <NavLink
+              className={getNavigationLinkClass}
+              to="/events"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Événements
             </NavLink>
           </nav>
 

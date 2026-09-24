@@ -1,3 +1,4 @@
+import { Link } from "react-router";
 import styles from "./Schedule.module.css";
 import utils from "./Schedule.utils.js";
 
@@ -7,7 +8,10 @@ function EventCard({ event, now }) {
   const typeLabel = event.type === "coaching" ? "Coaching" : "Cours collectif";
 
   return (
-    <article className={`${styles.eventCard} ${finished ? styles.finished : ""}`}>
+    <Link
+      className={`${styles.eventCard} ${finished ? styles.finished : ""}`}
+      to={`/events/${event.id}`}
+    >
       <div className={styles.eventHeader}>
         <span className={styles.eventType}>{typeLabel}</span>
         <time dateTime={event.date.toISOString()}>
@@ -29,12 +33,7 @@ function EventCard({ event, now }) {
           <dd>{event.location}</dd>
         </div>
       </dl>
-      <div className={styles.eventActions}>
-        <button type="button">Détails</button>
-        <button type="button">Modifier</button>
-        <button type="button">Supprimer</button>
-      </div>
-    </article>
+    </Link>
   );
 }
 

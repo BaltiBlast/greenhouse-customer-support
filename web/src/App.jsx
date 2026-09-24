@@ -5,7 +5,8 @@ import ClientCreatePage from "./pages/Client/ClientCreate/ClientCreate.page.jsx"
 import ClientDetailsPage from "./pages/Client/ClientDetails/ClientDetails.page.jsx";
 import ClientsPage from "./pages/Client/Clients/Clients.page.jsx";
 import DashboardPage from "./pages/Dashboard/Dashboard.page.jsx";
-import EventCreatePage from "./pages/EventCreate/EventCreate.page.jsx";
+import EventCreatePage from "./pages/Event/EventCreate/EventCreate.page.jsx";
+import EventDetailsPage from "./pages/Event/EventDetails/EventDetails.page.jsx";
 
 export default function App() {
   return (
@@ -17,7 +18,9 @@ export default function App() {
         <Route path="/clients" element={<ClientsPage />} />
         <Route path="/clients/new" element={<ClientCreatePage />} />
         <Route path="/clients/:clientId" element={<ClientDetailsPage />} />
+        <Route path="/events" element={<DashboardPage />} />
         <Route path="/events/new" element={<EventCreatePage />} />
+        <Route path="/events/:eventId" element={<EventDetailsPage />} />
       </Routes>
     </>
   );

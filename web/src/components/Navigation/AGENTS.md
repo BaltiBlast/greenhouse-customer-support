@@ -20,8 +20,8 @@
   burger, sous forme de boutons compacts.
 - Conserver une zone interactive d'au moins `44px` pour chaque bouton.
 - Réserver le panneau latéral aux routes de navigation et au contrôle du thème.
-- Afficher la route `/clients` dans la navigation principale sur ordinateur et
-  dans le panneau latéral sur mobile.
+- Afficher les routes `/clients` et `/events` dans la navigation principale sur
+  ordinateur et dans le panneau latéral sur mobile.
 - Ne pas déplacer la recherche ou l'ajout dans le panneau latéral.
 
 ## Ajout rapide
