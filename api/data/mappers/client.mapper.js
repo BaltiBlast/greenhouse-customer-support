@@ -40,7 +40,7 @@ class Client extends CoreMapper {
         $set: fieldsToSet,
         ...(Object.keys(fieldsToUnset).length ? { $unset: fieldsToUnset } : {}),
       },
-      { new: true, runValidators: true },
+      { returnDocument: "after", runValidators: true },
     );
   }
 
