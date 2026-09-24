@@ -6,7 +6,7 @@ const optionalTextSchema = z
   .transform((value) => value || undefined)
   .optional();
 
-export const createClientValidationSchema = z.strictObject({
+const clientValidationSchema = z.strictObject({
   firstName: z.string({ error: "Le prénom est obligatoire." }).trim().min(1, "Le prénom est obligatoire."),
   lastName: z.string({ error: "Le nom est obligatoire." }).trim().min(1, "Le nom est obligatoire."),
   birthDate: z.iso.date({ error: "La date de naissance est invalide." }),
@@ -39,3 +39,11 @@ export const createClientValidationSchema = z.strictObject({
   emergencyContactRelationship: optionalTextSchema,
   emergencyContactPhone: optionalTextSchema,
 });
+
+export const clientIdValidationSchema = z.string().regex(
+  /^[a-f\d]{24}$/i,
+  "L'identifiant du client est invalide.",
+);
+
+export const createClientValidationSchema = clientValidationSchema;
+export const updateClientValidationSchema = clientValidationSchema;

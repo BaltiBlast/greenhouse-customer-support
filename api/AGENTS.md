@@ -89,6 +89,10 @@ Chaque fichier `*.routes.js` doit :
 ## API et sécurité
 
 - Valider toutes les données provenant du client avant leur utilisation.
+- Retourner directement un tableau JSON lorsqu'une route expose plusieurs
+  ressources et un objet JSON lorsqu'elle expose une ressource unique.
+- Ne pas envelopper ces données dans une propriété portant le nom de la
+  ressource.
 - Ne jamais exposer une stack trace, un secret ou une donnée interne dans une
   réponse HTTP.
 - Centraliser la gestion des erreurs Express dans un middleware dédié.
