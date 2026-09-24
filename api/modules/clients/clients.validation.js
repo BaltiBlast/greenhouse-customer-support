@@ -14,7 +14,9 @@ export const createClientValidationSchema = z.strictObject({
     .number({ error: "La taille doit être un nombre." })
     .int("La taille doit être un nombre entier.")
     .positive("La taille doit être supérieure à zéro."),
-  weight: z.number({ error: "Le poids doit être un nombre." }).positive("Le poids doit être supérieur à zéro."),
+  weight: z
+    .number({ error: "Le poids doit être un nombre." })
+    .min(1, "Le poids doit être supérieur ou égal à 1 kg."),
   bodyFat: z
     .number({ error: "La masse grasse doit être un nombre." })
     .min(0, "La masse grasse ne peut pas être négative.")
