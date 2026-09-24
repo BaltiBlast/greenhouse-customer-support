@@ -63,6 +63,12 @@
   font-weight: var(--font-weight-regular);
 }
 
+.fieldError {
+  color: var(--color-required);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-regular);
+}
+
 .section input,
 .section select,
 .section textarea {
@@ -127,6 +133,25 @@
   border-color: var(--color-primary);
   color: var(--color-primary-text);
   background-color: var(--color-primary);
+}
+
+.submitButton:disabled {
+  opacity: 0.6;
+  cursor: wait;
+}
+
+.feedback {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  text-align: right;
+}
+
+.errorFeedback {
+  color: var(--color-required);
+}
+
+.successFeedback {
+  color: var(--color-primary);
 }
 
 @media (max-width: 40rem) {
