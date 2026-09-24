@@ -1,4 +1,4 @@
-# AGENTS.md — Frontend
+# AGENTS.md : Frontend
 
 ## Périmètre
 
@@ -9,6 +9,7 @@ spécifiques présents dans `src` restent applicables à leur périmètre.
 ## Technologies
 
 - Utiliser React avec Vite.
+- Utiliser React Hook Form pour les formulaires applicatifs.
 - Utiliser JavaScript et JSX, sans TypeScript.
 - Utiliser exclusivement les ES Modules avec `import` et `export`.
 - Inclure l'extension des fichiers locaux dans les imports.

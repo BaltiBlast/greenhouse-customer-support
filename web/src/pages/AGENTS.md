@@ -1,4 +1,4 @@
-# AGENTS.md — Pages
+# AGENTS.md : Pages
 
 ## Périmètre
 
@@ -83,3 +83,20 @@ pages/
   fichier utilitaire.
 - Conserver une fonction dans le fichier JSX lorsqu'elle est courte et
   strictement liée à son rendu.
+
+## Formulaires React Hook Form
+
+- Utiliser React Hook Form pour gérer les données, la validation, les erreurs et
+  l'état de soumission des formulaires applicatifs.
+- Placer la configuration propre à un formulaire dans un fichier `*.form.js`
+  situé à la racine du dossier de sa page.
+- Exporter par défaut un unique objet `formConfig` contenant au minimum les
+  valeurs initiales dans `defaultValues` et les règles dans `rules`.
+- Importer cet objet sous le nom `formConfig` dans la page concernée.
+- Utiliser `useFieldArray` pour les listes de champs dynamiques.
+- Transformer les données propres à l'interface vers le contrat de l'API dans
+  la fonction de soumission de la page.
+- Afficher les erreurs de React Hook Form au niveau des champs concernés.
+- Conserver un message général lorsque l'API refuse la requête ou rencontre une
+  erreur interne.
+- Réinitialiser le formulaire uniquement après une réponse valide de l'API.
