@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router";
-import { clients } from "./ClientSearchModal.data.js";
+import clients from "../../../../data/clients.data.js";
 import styles from "./ClientSearchModal.module.css";
 
 function normalizeText(value) {

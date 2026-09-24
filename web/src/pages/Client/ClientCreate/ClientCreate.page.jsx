@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { createClient } from "../../services/clients/clients.api.js";
-import formStyles from "../../styles/Form.module.css";
+import { createClient } from "../../../services/clients/clients.api.js";
+import formStyles from "../../../styles/Form.module.css";
 import formConfig from "./ClientCreate.form.js";
 import styles from "./ClientCreate.module.css";
 

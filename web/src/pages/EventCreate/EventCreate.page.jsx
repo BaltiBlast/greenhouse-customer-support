@@ -1,6 +1,7 @@
 import { useState } from "react";
+import clients from "../../data/clients.data.js";
 import formStyles from "../../styles/Form.module.css";
-import { clients, eventTypes } from "./EventCreate.data.js";
+import { eventTypes } from "./EventCreate.data.js";
 
 export default function EventCreatePage() {
   const [eventType, setEventType] = useState("");
@@ -71,7 +72,9 @@ export default function EventCreatePage() {
                 <select name="clientId" defaultValue="" required>
                   <option value="">Sélectionner un client</option>
                   {clients.map((client) => (
-                    <option value={client.id} key={client.id}>{client.name}</option>
+                    <option value={client.id} key={client.id}>
+                      {client.firstName} {client.lastName}
+                    </option>
                   ))}
                 </select>
               </label>

@@ -12,18 +12,24 @@ spécifiques :
 
 ```text
 pages/
-└── nom-page/
-    ├── NomPage.page.jsx
-    ├── NomPage.module.css
-    ├── NomPage.data.js        # si des données statiques sont nécessaires
-    ├── NomPage.utils.js       # si des fonctions pures sont nécessaires
-    └── sections/              # si la page doit être découpée en sections
-        └── NomSection/
-            ├── NomSection.jsx
-            └── NomSection.module.css
+└── Categorie/                 # lorsqu'au moins deux pages partagent un domaine
+    └── nom-page/
+        ├── NomPage.page.jsx
+        ├── NomPage.module.css
+        ├── NomPage.data.js    # si des données statiques sont nécessaires
+        ├── NomPage.utils.js   # si des fonctions pures sont nécessaires
+        └── sections/          # si la page doit être découpée en sections
+            └── NomSection/
+                ├── NomSection.jsx
+                └── NomSection.module.css
 ```
 
 - Ne créer que les fichiers et dossiers nécessaires à la page.
+- Regrouper dans un dossier de catégorie les pages appartenant au même domaine
+  fonctionnel, par exemple `Client/Clients`, `Client/ClientCreate` et
+  `Client/ClientDetails`.
+- Conserver directement à la racine de `pages` une page qui ne partage pas
+  encore de domaine avec une autre page.
 - Conserver dans le dossier de la page les sections, styles et données qui ne
   sont utilisés que par celle-ci.
 - Déplacer une section vers les composants partagés uniquement lorsqu'elle est
