@@ -96,6 +96,22 @@
   border: 0;
 }
 
+.state,
+.error {
+  padding: var(--space-xl);
+  text-align: center;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-border);
+}
+
+.state {
+  color: var(--color-text-muted);
+}
+
+.error {
+  color: var(--color-required);
+}
+
 @media (max-width: 40rem) {
   .page {
     padding: var(--space-lg) var(--space-md);

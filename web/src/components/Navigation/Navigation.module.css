@@ -13,6 +13,29 @@
   align-items: center;
 }
 
+.mainNavigation,
+.desktopNavigation {
+  display: flex;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.navigationLink {
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+}
+
+.navigationLink:hover,
+.navigationLinkActive {
+  color: var(--color-primary);
+}
+
+.navigationLink:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 4px;
+}
+
 .logoMark {
   width: auto;
   height: 2.25rem;
@@ -160,6 +183,11 @@
   stroke-width: 1.8;
 }
 
+.mobileNavigation {
+  display: grid;
+  gap: var(--space-md);
+}
+
 @media (max-width: 40rem) {
   .navigation {
     min-height: 4rem;
@@ -172,6 +200,10 @@
 
   .logoMark {
     height: var(--size-md);
+  }
+
+  .desktopNavigation {
+    display: none;
   }
 
   .actions {
@@ -255,6 +287,10 @@
     justify-content: space-between;
     padding-top: var(--space-md);
     border-top: 1px solid var(--color-border);
+  }
+
+  .mobileNavigation .navigationLink {
+    padding: var(--space-md) 0;
   }
 
 }

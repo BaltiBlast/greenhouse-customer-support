@@ -1,11 +1,15 @@
 import { useEffect, useState } from "react";
-import { Link } from "react-router";
+import { Link, NavLink } from "react-router";
 import logoDark from "../../assets/branding/logo-dark.png";
 import logoLight from "../../assets/branding/logo-light.png";
 import styles from "./Navigation.module.css";
 import AddMenu from "./sections/AddMenu/AddMenu.jsx";
 import ClientSearchModal from "./sections/ClientSearchModal/ClientSearchModal.jsx";
 import ThemeToggle from "./sections/ThemeToggle/ThemeToggle.jsx";
+
+function getNavigationLinkClass({ isActive }) {
+  return `${styles.navigationLink} ${isActive ? styles.navigationLinkActive : ""}`;
+}
 
 function SearchTrigger({ compact = false, onClick }) {
   return (
@@ -60,18 +64,26 @@ export default function Navigation() {
   return (
     <>
       <header className={styles.navigation}>
-        <Link className={styles.logo} to="/" aria-label="Greenhouse : accueil">
-          <img
-            className={`${styles.logoMark} ${styles.logoLight}`}
-            src={logoLight}
-            alt=""
-          />
-          <img
-            className={`${styles.logoMark} ${styles.logoDark}`}
-            src={logoDark}
-            alt=""
-          />
-        </Link>
+        <div className={styles.mainNavigation}>
+          <Link className={styles.logo} to="/" aria-label="Greenhouse : accueil">
+            <img
+              className={`${styles.logoMark} ${styles.logoLight}`}
+              src={logoLight}
+              alt=""
+            />
+            <img
+              className={`${styles.logoMark} ${styles.logoDark}`}
+              src={logoDark}
+              alt=""
+            />
+          </Link>
+
+          <nav className={styles.desktopNavigation} aria-label="Navigation principale">
+            <NavLink className={getNavigationLinkClass} to="/clients">
+              Clients
+            </NavLink>
+          </nav>
+        </div>
 
         <div className={styles.actions}>
           <SearchTrigger onClick={openSearch} />
@@ -126,6 +138,16 @@ export default function Navigation() {
         </div>
 
         <div className={styles.mobileMenuContent}>
+          <nav className={styles.mobileNavigation} aria-label="Navigation principale">
+            <NavLink
+              className={getNavigationLinkClass}
+              to="/clients"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Clients
+            </NavLink>
+          </nav>
+
           <div className={styles.themeRow}>
             <span>Thème</span>
             <ThemeToggle />

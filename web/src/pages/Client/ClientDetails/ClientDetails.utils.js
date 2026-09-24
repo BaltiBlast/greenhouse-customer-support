@@ -5,7 +5,7 @@ const utils = {
     return {
       firstName: client.firstName,
       lastName: client.lastName,
-      birthDate: client.birthDate,
+      birthDate: client.birthDate.slice(0, 10),
       height: latestMeasurement.height,
       weight: latestMeasurement.weight,
       bodyFat: latestMeasurement.bodyFat ?? "",

@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router";
-import clients from "../../../data/clients.data.js";
+import { getClients } from "../../../services/clients/clients.api.js";
 import styles from "./Clients.module.css";
 import ClientCards from "./sections/ClientCards/ClientCards.jsx";
 
@@ -12,6 +12,9 @@ function normalizeText(value) {
 }
 
 export default function ClientsPage() {
+  const [clients, setClients] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const normalizedSearch = normalizeText(searchTerm.trim());
   const filteredClients = normalizedSearch
@@ -19,6 +22,29 @@ export default function ClientsPage() {
         normalizeText(`${client.firstName} ${client.lastName}`).includes(normalizedSearch),
       )
     : clients;
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadClients() {
+      try {
+        const clientList = await getClients(controller.signal);
+        setClients(clientList);
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setErrorMessage(error.message || "Impossible de récupérer les clients.");
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    loadClients();
+
+    return () => controller.abort();
+  }, []);
 
   return (
     <main className={styles.page}>
@@ -48,7 +74,9 @@ export default function ClientsPage() {
         />
       </label>
 
-      <ClientCards clients={filteredClients} />
+      {isLoading && <p className={styles.state} role="status">Chargement des clients...</p>}
+      {!isLoading && errorMessage && <p className={styles.error} role="alert">{errorMessage}</p>}
+      {!isLoading && !errorMessage && <ClientCards clients={filteredClients} />}
     </main>
   );
 }

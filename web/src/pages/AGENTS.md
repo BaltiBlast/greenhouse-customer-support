@@ -51,6 +51,9 @@ pages/
 - Ne pas extraire un composant pour un fragment de JSX trivial.
 - Une section propre à une page reste dans le dossier `sections` de cette
   page.
+- Confirmer toute suppression définitive dans une modale React avant d'appeler
+  l'API. La modale doit permettre d'annuler sans effet et conserver l'erreur de
+  suppression visible sans se fermer.
 
 ## Logique
 

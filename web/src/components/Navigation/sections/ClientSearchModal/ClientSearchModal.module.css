@@ -124,6 +124,12 @@
   text-align: center;
 }
 
+.errorResult {
+  padding: var(--space-lg) 0;
+  color: var(--color-required);
+  text-align: center;
+}
+
 .visuallyHidden {
   position: absolute;
   width: 1px;

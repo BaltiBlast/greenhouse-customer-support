@@ -3,10 +3,9 @@
 ## Recherche client
 
 - La recherche client s'ouvre dans une fenêtre modale pilotée par l'état React.
-- La modale, ses styles et ses données fictives restent regroupés dans
-  `sections/ClientSearchModal` jusqu'au branchement de l'API.
-- Lors du branchement de l'API, les données fictives sont remplacées par un
-  service du domaine client.
+- La modale et ses styles restent regroupés dans `sections/ClientSearchModal`.
+- Charger les clients depuis le service du domaine client à l'ouverture de la
+  modale et annuler la requête si elle est fermée avant la réponse.
 - Le filtrage local porte uniquement sur le nom et le prénom.
 - Un clic sur un résultat ferme la modale et navigue vers
   `/clients/:clientId`.
@@ -21,6 +20,8 @@
   burger, sous forme de boutons compacts.
 - Conserver une zone interactive d'au moins `44px` pour chaque bouton.
 - Réserver le panneau latéral aux routes de navigation et au contrôle du thème.
+- Afficher la route `/clients` dans la navigation principale sur ordinateur et
+  dans le panneau latéral sur mobile.
 - Ne pas déplacer la recherche ou l'ajout dans le panneau latéral.
 
 ## Ajout rapide

@@ -1,11 +1,16 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useFieldArray, useForm } from "react-hook-form";
-import { Link, useParams } from "react-router";
-import clients from "../../../data/clients.data.js";
+import { Link, useNavigate, useParams } from "react-router";
+import {
+  deleteClient,
+  getClientById,
+  updateClient,
+} from "../../../services/clients/clients.api.js";
 import formStyles from "../../../styles/Form.module.css";
 import formConfig from "./ClientDetails.form.js";
 import styles from "./ClientDetails.module.css";
 import utils from "./ClientDetails.utils.js";
+import DeleteClientModal from "./sections/DeleteClientModal/DeleteClientModal.jsx";
 
 function FieldError({ message }) {
   return message ? <span className={formStyles.fieldError}>{message}</span> : null;
@@ -13,28 +18,75 @@ function FieldError({ message }) {
 
 export default function ClientDetailsPage() {
   const { clientId } = useParams();
-  const initialClient = clients.find((client) => client.id === clientId);
-  const [client, setClient] = useState(initialClient);
+  const navigate = useNavigate();
+  const [client, setClient] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
+  const [isDeleteModalOpen, setIsDeleteModalOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [deleteError, setDeleteError] = useState(null);
   const [successMessage, setSuccessMessage] = useState(null);
   const {
+    clearErrors,
     control,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     register,
     reset,
+    setError,
     watch,
   } = useForm({
-    defaultValues: initialClient ? utils.getFormValues(initialClient) : formConfig.defaultValues,
+    defaultValues: formConfig.defaultValues,
   });
   const { append, fields, remove } = useFieldArray({ control, name: "pathologies" });
   const pathologies = watch("pathologies");
   const canAddPathology = Boolean(pathologies?.at(-1)?.value?.trim());
 
-  if (!client) {
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadClient() {
+      setIsLoading(true);
+      setErrorMessage(null);
+
+      try {
+        const clientData = await getClientById(clientId, controller.signal);
+        setClient(clientData);
+        reset(utils.getFormValues(clientData));
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setClient(null);
+          setErrorMessage(
+            error.status === 404
+              ? "Ce client est introuvable."
+              : error.message || "Impossible de récupérer le client.",
+          );
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    loadClient();
+
+    return () => controller.abort();
+  }, [clientId, reset]);
+
+  if (isLoading) {
     return (
       <main className={styles.notFound}>
-        <p>Ce client est introuvable.</p>
+        <p role="status">Chargement du client...</p>
+      </main>
+    );
+  }
+
+  if (errorMessage || !client) {
+    return (
+      <main className={styles.notFound}>
+        <p role="alert">{errorMessage || "Ce client est introuvable."}</p>
         <Link to="/clients">Revenir aux clients</Link>
       </main>
     );
@@ -42,17 +94,47 @@ export default function ClientDetailsPage() {
 
   function cancelEditing() {
     reset(utils.getFormValues(client));
+    clearErrors("root.server");
     setIsEditing(false);
     setSuccessMessage(null);
   }
 
-  function saveClient(data) {
-    const updatedClient = utils.getUpdatedClient(client, data);
+  async function saveClient(data) {
+    clearErrors("root.server");
+    setSuccessMessage(null);
 
-    setClient(updatedClient);
-    reset(utils.getFormValues(updatedClient));
-    setIsEditing(false);
-    setSuccessMessage("Les modifications ont été enregistrées localement.");
+    const clientData = {
+      ...data,
+      pathologies: data.pathologies.map(({ value }) => value),
+    };
+
+    try {
+      await updateClient(clientId, clientData);
+      const updatedClient = utils.getUpdatedClient(client, data);
+
+      setClient(updatedClient);
+      reset(utils.getFormValues(updatedClient));
+      setIsEditing(false);
+      setSuccessMessage("Les modifications ont été enregistrées.");
+    } catch (error) {
+      setError("root.server", {
+        type: "server",
+        message: error.message || "Impossible de modifier le client.",
+      });
+    }
+  }
+
+  async function confirmDeleteClient() {
+    setIsDeleting(true);
+    setDeleteError(null);
+
+    try {
+      await deleteClient(clientId);
+      navigate("/clients", { replace: true });
+    } catch (error) {
+      setDeleteError(error.message || "Impossible de supprimer le client.");
+      setIsDeleting(false);
+    }
   }
 
   return (
@@ -66,12 +148,20 @@ export default function ClientDetailsPage() {
         </div>
 
         {!isEditing && (
-          <button className={formStyles.secondaryButton} type="button" onClick={() => {
-            setIsEditing(true);
-            setSuccessMessage(null);
-          }}>
-            Modifier
-          </button>
+          <div className={styles.headerActions}>
+            <button className={`${formStyles.secondaryButton} ${styles.deleteButton}`} type="button" onClick={() => {
+              setDeleteError(null);
+              setIsDeleteModalOpen(true);
+            }}>
+              Supprimer
+            </button>
+            <button className={formStyles.secondaryButton} type="button" onClick={() => {
+              setIsEditing(true);
+              setSuccessMessage(null);
+            }}>
+              Modifier
+            </button>
+          </div>
         )}
       </header>
 
@@ -151,12 +241,30 @@ export default function ClientDetailsPage() {
         {isEditing && (
           <div className={formStyles.actions}>
             <button className={formStyles.secondaryButton} type="button" onClick={cancelEditing}>Annuler</button>
-            <button className={formStyles.submitButton} type="submit">Enregistrer</button>
+            <button className={formStyles.submitButton} type="submit" disabled={isSubmitting}>
+              {isSubmitting ? "Enregistrement..." : "Enregistrer"}
+            </button>
           </div>
+        )}
+
+        {errors.root?.server?.message && (
+          <p className={`${formStyles.feedback} ${formStyles.errorFeedback}`} role="alert">
+            {errors.root.server.message}
+          </p>
         )}
 
         {successMessage && <p className={`${formStyles.feedback} ${formStyles.successFeedback}`} role="status">{successMessage}</p>}
       </form>
+
+      {isDeleteModalOpen && (
+        <DeleteClientModal
+          clientName={`${client.firstName} ${client.lastName}`}
+          errorMessage={deleteError}
+          isDeleting={isDeleting}
+          onCancel={() => setIsDeleteModalOpen(false)}
+          onConfirm={confirmDeleteClient}
+        />
+      )}
     </main>
   );
 }

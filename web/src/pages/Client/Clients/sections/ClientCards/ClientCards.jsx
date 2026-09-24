@@ -3,7 +3,7 @@ import styles from "./ClientCards.module.css";
 
 function getAge(birthDate) {
   const today = new Date();
-  const birthday = new Date(`${birthDate}T00:00:00`);
+  const birthday = new Date(birthDate);
   let age = today.getFullYear() - birthday.getFullYear();
   const monthDifference = today.getMonth() - birthday.getMonth();
 

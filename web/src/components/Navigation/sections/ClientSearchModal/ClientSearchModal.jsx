@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
-import clients from "../../../../data/clients.data.js";
+import { getClients } from "../../../../services/clients/clients.api.js";
 import styles from "./ClientSearchModal.module.css";
 
 function normalizeText(value) {
@@ -11,6 +11,9 @@ function normalizeText(value) {
 }
 
 export default function ClientSearchModal({ onClose }) {
+  const [clients, setClients] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [errorMessage, setErrorMessage] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
   const navigate = useNavigate();
   const normalizedSearch = normalizeText(searchTerm.trim());
@@ -19,6 +22,29 @@ export default function ClientSearchModal({ onClose }) {
         normalizeText(`${firstName} ${lastName}`).includes(normalizedSearch),
       )
     : [];
+
+  useEffect(() => {
+    const controller = new AbortController();
+
+    async function loadClients() {
+      try {
+        const clientList = await getClients(controller.signal);
+        setClients(clientList);
+      } catch (error) {
+        if (error.name !== "AbortError") {
+          setErrorMessage(error.message || "Impossible de récupérer les clients.");
+        }
+      } finally {
+        if (!controller.signal.aborted) {
+          setIsLoading(false);
+        }
+      }
+    }
+
+    loadClients();
+
+    return () => controller.abort();
+  }, []);
 
   function openClient(clientId) {
     onClose();
@@ -64,7 +90,11 @@ export default function ClientSearchModal({ onClose }) {
         </label>
 
         <div className={styles.results}>
-          {!normalizedSearch ? null : filteredClients.length > 0 ? (
+          {!normalizedSearch ? null : isLoading ? (
+            <p className={styles.emptyResult} role="status">Chargement des clients...</p>
+          ) : errorMessage ? (
+            <p className={styles.errorResult} role="alert">{errorMessage}</p>
+          ) : filteredClients.length > 0 ? (
             <ul>
               {filteredClients.map((client) => (
                 <li key={client.id}>
