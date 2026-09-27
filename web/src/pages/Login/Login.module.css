@@ -1,0 +1,68 @@
+.page {
+  display: grid;
+  min-height: 100vh;
+  padding: var(--space-xl);
+  place-items: center;
+}
+
+.card {
+  width: min(100%, 28rem);
+}
+
+.brand {
+  margin-bottom: var(--space-2xl);
+  text-align: center;
+}
+
+.logo {
+  width: auto;
+  height: var(--size-xl);
+}
+
+.logoDark {
+  display: none;
+}
+
+:global(:root[data-theme="dark"]) .logoLight {
+  display: none;
+}
+
+:global(:root[data-theme="dark"]) .logoDark {
+  display: inline-block;
+}
+
+.header {
+  margin-bottom: var(--space-xl);
+  text-align: center;
+}
+
+.header h1 {
+  margin-bottom: var(--space-sm);
+  font-size: var(--font-size-2xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.header p {
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}
+
+.fields {
+  gap: var(--space-lg);
+}
+
+.fields .submitButton {
+  width: 100%;
+  margin-top: var(--space-sm);
+}
+
+@media (max-width: 40rem) {
+  .page {
+    min-height: 100dvh;
+    padding: var(--space-lg) var(--space-md);
+  }
+
+  .brand {
+    margin-bottom: var(--space-xl);
+  }
+}

@@ -7,6 +7,7 @@ import ClientsPage from "./pages/Client/Clients/Clients.page.jsx";
 import DashboardPage from "./pages/Dashboard/Dashboard.page.jsx";
 import EventCreatePage from "./pages/Event/EventCreate/EventCreate.page.jsx";
 import EventDetailsPage from "./pages/Event/EventDetails/EventDetails.page.jsx";
+import LoginPage from "./pages/Login/Login.page.jsx";
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <ScrollToTop />
       <Navigation />
       <Routes>
+        <Route path="/login" element={<LoginPage />} />
         <Route path="/" element={<DashboardPage />} />
         <Route path="/clients" element={<ClientsPage />} />
         <Route path="/clients/new" element={<ClientCreatePage />} />
