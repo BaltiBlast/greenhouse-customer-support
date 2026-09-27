@@ -100,6 +100,17 @@ Chaque fichier `*.routes.js` doit :
 - Appliquer les contrôles d'authentification et d'autorisation avant la logique
   métier protégée.
 
+## Authentification et sessions
+
+- Utiliser des sessions serveur avec `express-session`.
+- Stocker les sessions dans MongoDB avec `connect-mongo`.
+- Transmettre uniquement l'identifiant de session dans un cookie `HttpOnly`,
+  `SameSite=Lax` et `Secure` en production.
+- Utiliser Argon2id pour le hachage et la vérification des mots de passe.
+- Ne jamais exposer un hash de mot de passe dans une réponse HTTP.
+- Ne pas ajouter de route publique d'inscription sans décision explicite.
+- Charger le secret de session depuis l'environnement.
+
 ## Modifications et validation
 
 - Limiter les modifications au périmètre demandé.
