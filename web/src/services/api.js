@@ -32,6 +32,7 @@ export async function apiRequest(path, options = {}) {
 
   const response = await fetch(buildUrl(path), {
     ...requestOptions,
+    credentials: "include",
     headers: requestHeaders,
     body: !isFormData && body != null ? JSON.stringify(body) : body,
   });

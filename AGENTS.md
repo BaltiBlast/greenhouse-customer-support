@@ -69,6 +69,14 @@ Utiliser le format suivant :
 type(périmètre): description courte à l'infinitif
 ```
 
+## Déploiement Render
+
+- Utiliser `api/render.yaml` pour le Blueprint du service API.
+- Utiliser `web/render.yaml` pour le Blueprint du site statique.
+- Conserver les commandes de build à la racine du monorepo afin d'utiliser le
+  lockfile et les workspaces npm.
+- Ne jamais écrire une valeur secrète directement dans un Blueprint.
+
 Le périmètre est obligatoire :
 
 - `api` pour une modification du backend ;

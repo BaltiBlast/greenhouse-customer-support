@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: greenhouse-customer-support-web
+    runtime: static
+    plan: free
+    buildCommand: npm ci && npm run build --workspace=web
+    staticPublishPath: ./web/dist
+    routes:
+      - type: rewrite
+        source: /*
+        destination: /index.html
+    envVars:
+      - key: NODE_VERSION
+        value: 24.21.0
+      - key: SKIP_INSTALL_DEPS
+        value: true
+      - key: VITE_API_URL
+        sync: false
