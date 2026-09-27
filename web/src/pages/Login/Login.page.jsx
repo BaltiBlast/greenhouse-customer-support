@@ -1,4 +1,6 @@
 import { useForm } from "react-hook-form";
+import { Navigate, useNavigate } from "react-router";
+import useAuth from "../../auth/useAuth.js";
 import logoDark from "../../assets/branding/logo-dark.png";
 import logoLight from "../../assets/branding/logo-light.png";
 import formStyles from "../../styles/Form.module.css";
@@ -14,13 +16,33 @@ function FieldError({ message }) {
 }
 
 export default function LoginPage() {
+  const { login, user } = useAuth();
+  const navigate = useNavigate();
   const {
-    formState: { errors },
+    clearErrors,
+    formState: { errors, isSubmitting },
     handleSubmit,
     register,
+    setError,
   } = useForm({ defaultValues: formConfig.defaultValues });
 
-  function submitLogin() {}
+  async function submitLogin(credentials) {
+    clearErrors("root.server");
+
+    try {
+      await login(credentials);
+      navigate("/", { replace: true });
+    } catch (error) {
+      setError("root.server", {
+        type: "server",
+        message: error.message || "Impossible de vous connecter.",
+      });
+    }
+  }
+
+  if (user) {
+    return <Navigate to="/" replace />;
+  }
 
   return (
     <main className={styles.page}>
@@ -71,9 +93,22 @@ export default function LoginPage() {
               <FieldError message={errors.password?.message} />
             </label>
 
-            <button className={formStyles.submitButton} type="submit">
-              Se connecter
+            <button
+              className={formStyles.submitButton}
+              type="submit"
+              disabled={isSubmitting}
+            >
+              {isSubmitting ? "Connexion..." : "Se connecter"}
             </button>
+
+            {errors.root?.server?.message && (
+              <p
+                className={`${formStyles.feedback} ${formStyles.errorFeedback}`}
+                role="alert"
+              >
+                {errors.root.server.message}
+              </p>
+            )}
           </fieldset>
         </form>
       </section>

@@ -1,3 +1,5 @@
+import authEvents from "../auth/auth.events.js";
+
 const API_URL = (import.meta.env.VITE_API_URL || "/api").replace(/\/$/, "");
 
 function buildUrl(path) {
@@ -36,6 +38,10 @@ export async function apiRequest(path, options = {}) {
   const data = await readResponse(response);
 
   if (!response.ok) {
+    if (response.status === 401) {
+      window.dispatchEvent(new Event(authEvents.unauthorized));
+    }
+
     const error = new Error(data?.message || `Erreur API (${response.status}).`);
     error.status = response.status;
     error.data = data;
