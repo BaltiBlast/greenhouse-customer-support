@@ -3,6 +3,7 @@ services:
     name: greenhouse-customer-support-api
     runtime: node
     plan: free
+    branch: main
     buildCommand: npm ci
     startCommand: npm run start --workspace=api
     envVars:
