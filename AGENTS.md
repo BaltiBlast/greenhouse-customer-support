@@ -77,6 +77,20 @@ type(périmètre): description courte à l'infinitif
   lockfile et les workspaces npm.
 - Ne jamais écrire une valeur secrète directement dans un Blueprint.
 
+## Organisation des branches
+
+- `main` contient uniquement les versions destinées à la production et sert au
+  déploiement Render.
+- `dev` est la branche d'intégration des développements frontend et backend.
+- `dev_api` contient les développements concernant l'API.
+- `dev_front` contient les développements concernant le frontend.
+- Fusionner `dev_api` et `dev_front` dans `dev` après validation.
+- Fusionner `dev` dans `main` uniquement lorsqu'une version est prête à être
+  déployée en production.
+- Les fichiers racine nécessaires à un workspace, notamment `package-lock.json`,
+  suivent la branche qui introduit la modification concernée.
+- Réserver les changements réellement transversaux à `dev`.
+
 Le périmètre est obligatoire :
 
 - `api` pour une modification du backend ;
