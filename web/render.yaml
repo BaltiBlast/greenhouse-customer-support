@@ -3,6 +3,7 @@ services:
     name: greenhouse-customer-support-web
     runtime: static
     plan: free
+    branch: main
     buildCommand: npm ci && npm run build --workspace=web
     staticPublishPath: ./web/dist
     routes:
